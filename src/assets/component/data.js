@@ -1,0 +1,233 @@
+export const customers = [
+  {
+    id: 1,
+    name: "MinThuKyaw",
+    nrc: "12/KaMaNa(N)123456",
+    phone: "0943033536",
+    address: "No. 123, Pyay Road, Sanchaung Township, Yangon, Myanmar",
+    location: { lat: 16.56393, lng: 96.09244 },
+    status: "Active",
+    package: "20mbps",
+    startDate: "2023-09-15"
+  },
+  {
+    id: 2,
+    name: "Aung Min",
+    nrc: "12/LaMaNa(N)223344",
+    phone: "0942012345",
+    address: "No. 45, Baho Road, Sanchaung, Yangon, Myanmar",
+    location: { lat: 16.5245, lng: 96.1156 },
+    status: "Pending",
+    package: "50mbps",
+    startDate: "2023-06-10"
+  },
+  {
+    id: 3,
+    name: "Su Su Win",
+    nrc: "13/PaTaYa(N)998877",
+    phone: "0954312345",
+    address: "No. 78, Anawrahta Road, Kyauktada, Yangon, Myanmar",
+    location: { lat: 16.7745, lng: 96.1589 },
+    status: "Cancel",
+    package: "20mbps",
+    startDate: "2022-12-01"
+  },
+  {
+    id: 4,
+    name: "Kyaw Zin",
+    nrc: "12/YaKaNa(N)556677",
+    phone: "0945678901",
+    address: "No. 12, Inya Road, Kamayut, Yangon, Myanmar",
+    location: { lat: 16.8402, lng: 96.1356 },
+    status: "Active",
+    package: "100mbps",
+    startDate: "2024-01-20"
+  },
+  {
+    id: 5,
+    name: "Hnin Ei",
+    nrc: "14/KaTaNa(N)445566",
+    phone: "0932123456",
+    address: "No. 9, Strand Road, Lanmadaw, Yangon, Myanmar",
+    location: { lat: 16.7793, lng: 96.1457 },
+    status: "Pending",
+    package: "20mbps",
+    startDate: "2023-08-11"
+  },
+  {
+    id: 6,
+    name: "Zaw Lin",
+    nrc: "12/PaLaNa(N)334455",
+    phone: "0923456789",
+    address: "No. 101, Pyay Road, Hlaing, Yangon, Myanmar",
+    location: { lat: 16.8567, lng: 96.1289 },
+    status: "Cancel",
+    package: "30mbps",
+    startDate: "2022-05-05"
+  },
+  {
+    id: 7,
+    name: "Mya Mya",
+    nrc: "13/KaYaNa(N)667788",
+    phone: "0949988776",
+    address: "No. 55, Merchant Street, Pabedan, Yangon, Myanmar",
+    location: { lat: 16.7788, lng: 96.1566 },
+    status: "Active",
+    package: "40mbps",
+    startDate: "2023-11-22"
+  },
+  {
+    id: 8,
+    name: "Ko Ko Naing",
+    nrc: "12/LaYaNa(N)123789",
+    phone: "0912345678",
+    address: "No. 23, Sule Pagoda Road, Kyauktada, Yangon, Myanmar",
+    location: { lat: 16.7742, lng: 96.1582 },
+    status: "Pending",
+    package: "30mbps",
+    startDate: "2024-02-01"
+  },
+  {
+    id: 9,
+    name: "May Thu",
+    nrc: "14/PaKaNa(N)789123",
+    phone: "0956781234",
+    address: "No. 66, Kabar Aye Pagoda Road, Yankin, Yangon, Myanmar",
+    location: { lat: 16.8211, lng: 96.1654 },
+    status: "Cancel",
+    package: "20mbps",
+    startDate: "2023-03-19"
+  },
+  {
+    id: 10,
+    name: "Htut Aung",
+    nrc: "12/DaLaNa(N)852741",
+    phone: "0921122334",
+    address: "No. 89, Thamain Bayan Road, Mayangone, Yangon, Myanmar",
+    location: { lat: 16.9075, lng: 96.1344 },
+    status: "Active",
+    package: "40mbps",
+    startDate: "2022-09-30"
+  },
+  {
+    id: 11,
+    name: "Ei Phyu",
+    nrc: "13/KaTaNa(N)963852",
+    phone: "0933445566",
+    address: "No. 5, University Avenue, Bahan, Yangon, Myanmar",
+    location: { lat: 16.8012, lng: 96.1523 },
+    status: "Pending",
+    package: "70mbps",
+    startDate: "2024-03-12"
+  },
+  {
+    id: 12,
+    name: "Nyein Chan",
+    nrc: "12/PaSaNa(N)147258",
+    phone: "0945566778",
+    address: "No. 44, Bayint Naung Road, Insein, Yangon, Myanmar",
+    location: { lat: 16.9088, lng: 96.0933 },
+    status: "Cancel",
+    package: "20mbps",
+    startDate: "2021-11-11"
+  },
+  {
+    id: 13,
+    name: "Thida Oo",
+    nrc: "14/LaMaNa(N)258369",
+    phone: "0922233445",
+    address: "No. 77, Dhammazedi Road, Bahan, Yangon, Myanmar",
+    location: { lat: 16.8077, lng: 96.1499 },
+    status: "Active",
+    package: "100mbps",
+    startDate: "2023-07-07"
+  },
+  {
+    id: 14,
+    name: "Kyaw Kyaw",
+    nrc: "12/KaMaNa(N)321654",
+    phone: "0959988776",
+    address: "No. 12, Hledan Road, Kamayut, Yangon, Myanmar",
+    location: { lat: 16.8245, lng: 96.1311 },
+    status: "Pending",
+    package: "70mbps",
+    startDate: "2024-01-01"
+  },
+  {
+    id: 15,
+    name: "Sandar Win",
+    nrc: "13/PaTaNa(N)654987",
+    phone: "0941122334",
+    address: "No. 3, Shwe Gon Daing Road, Bahan, Yangon, Myanmar",
+    location: { lat: 16.8099, lng: 96.1588 },
+    status: "Cancel",
+    package: "30mbps",
+    startDate: "2022-04-18"
+  },
+  {
+    id: 16,
+    name: "Zin Mar",
+    nrc: "14/KaYaNa(N)456123",
+    phone: "0939988776",
+    address: "No. 29, Yadanar Road, Thingangyun, Yangon, Myanmar",
+    location: { lat: 16.8271, lng: 96.2002 },
+    status: "Active",
+    package: "40mbps",
+    startDate: "2023-10-10"
+  },
+  {
+    id: 17,
+    name: "Min Zaw",
+    nrc: "12/LaYaNa(N)741852",
+    phone: "0923344556",
+    address: "No. 88, Thitsar Road, South Okkalapa, Yangon, Myanmar",
+    location: { lat: 16.8655, lng: 96.1955 },
+    status: "Pending",
+    package: "50mbps",
+    startDate: "2023-12-25"
+  },
+  {
+    id: 18,
+    name: "Phyo Wai",
+    nrc: "13/KaTaNa(N)852963",
+    phone: "0947766554",
+    address: "No. 19, Bogyoke Road, Pazundaung, Yangon, Myanmar",
+    location: { lat: 16.7811, lng: 96.1699 },
+    status: "Cancel",
+    package: "20mbps",
+    startDate: "2022-06-06"
+  },
+  {
+    id: 19,
+    name: "Aye Aye",
+    nrc: "14/PaSaNa(N)369258",
+    phone: "0952233445",
+    address: "No. 61, Maha Bandoola Road, Latha, Yangon, Myanmar",
+    location: { lat: 16.7777, lng: 96.1505 },
+    status: "Active",
+    package: "70mbps",
+    startDate: "2023-05-05"
+  },
+  {
+    id: 20,
+    name: "Htet Naing",
+    nrc: "12/DaLaNa(N)159753",
+    phone: "0925566778",
+    address: "No. 7, Kyaikasan Road, Tamwe, Yangon, Myanmar",
+    location: { lat: 16.7999, lng: 96.1788 },
+    status: "Pending",
+    package: "70mbps",
+    startDate: "2024-02-20"
+  },
+  {
+    id: 21,
+    name: "Yadanar",
+    nrc: "13/LaMaNa(N)951357",
+    phone: "0948899001",
+    address: "No. 2, Mingalar Road, North Okkalapa, Yangon, Myanmar",
+    location: { lat: 16.9022, lng: 96.1866 },
+    status: "Cancel",
+    package: "30mbps",
+    startDate: "2021-08-08"
+  }
+];
