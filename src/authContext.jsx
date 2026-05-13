@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-
+import {LoadingScreen} from "./assets/component/loadingScreen.jsx";
 //eslint-disable-next-line
 export const AuthContext = createContext();
 
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading }}>
-      {loading ? <h1>Loading...</h1> : children}
+      {loading ? <LoadingScreen /> : children}
     </AuthContext.Provider>
   );
 };
