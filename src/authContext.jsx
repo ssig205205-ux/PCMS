@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import {LoadingScreen} from "./assets/component/loadingScreen.jsx";
+import {LoadingScreen} from "./loadingScreen.jsx";
 //eslint-disable-next-line
 export const AuthContext = createContext();
 
