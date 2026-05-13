@@ -10,7 +10,7 @@ export default function LeadPage({ lead, setLead, setDelete }) {
   const [phone, setPhone] = useState("");
   const [reason, setReason] = useState("");
 
-  const leadReverse = [...lead].reverse();
+  const leadReverse = Array.isArray(lead) ? [...lead].reverse() : [];
   let leadTableData = leadReverse;
 
   if (filterWord) {
