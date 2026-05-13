@@ -12,26 +12,31 @@ export default function TotalBoxs({customersData}) {
   const [lead, setLead] = useState(0);
 
   useEffect(() => {
-    setTotal(customersData.length);
-    let activeCount = 0;
-    let cancelCount = 0;
-    let leadCount = 0;
+  if (!Array.isArray(customersData)) {
+    setTotal(0);
+    setActive(0);
+    setCancel(0);
+    setLead(0);
+    return;
+  }
 
-    customersData.forEach((item) => {
-      if (item.status === "Active") {
-        activeCount++;
-      }
-      if (item.status === "Cancel") {
-        cancelCount++;
-      }
-      if (item.status === "Pending") {
-        leadCount++;
-      }
-    });
-    setActive(activeCount);
-    setCancel(cancelCount);
-    setLead(leadCount);
-  }, [customersData]);
+  setTotal(customersData.length);
+
+  let activeCount = 0;
+  let cancelCount = 0;
+  let leadCount = 0;
+
+  customersData.forEach((item) => {
+    if (item.status === "Active") activeCount++;
+    if (item.status === "Cancel") cancelCount++;
+    if (item.status === "Pending") leadCount++;
+  });
+
+  setActive(activeCount);
+  setCancel(cancelCount);
+  setLead(leadCount);
+
+}, [customersData]);
 
   return (
     <div className="totalBoxs">

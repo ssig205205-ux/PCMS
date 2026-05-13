@@ -9,7 +9,9 @@ export default function Tabel({
   date,
   customersData,
 }) {
-  let tableData = [...customersData];
+ let tableData = Array.isArray(customersData)
+  ? [...customersData]
+  : [];
 
   if (searchCus) {
     tableData = tableData.filter((item) => {
@@ -18,7 +20,7 @@ export default function Tabel({
         item.name.toLowerCase().includes(searchTerm) ||
         // item.id.toString().includes(searchTerm) ||
         item.phone.toString().includes(searchTerm) ||
-        item.CusId.toString().includes(searchTerm)
+      item.CusId?.toString().includes(searchTerm)
       );
     });
   }
