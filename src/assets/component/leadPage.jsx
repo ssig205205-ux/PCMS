@@ -96,7 +96,7 @@ export default function LeadPage({ lead, setLead, setDelete }) {
   const handleSubmitDelete = async (id) => {
     if (window.confirm("are you sure You want to delete this lead?")) {
       try {
-        const response = await fetch(`http://localhost:5000/api/lead/${id}`, {
+        const response = await fetch(`https://cms-backend-xyb9.onrender.com/api/lead/${id}`, {
           method: "DELETE",
           credentials: "include",
         });
