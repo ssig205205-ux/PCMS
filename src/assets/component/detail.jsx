@@ -196,7 +196,7 @@ export default function Detail() {
             <div className="row">
             <span>App password</span>
             {!edit ? (
-              <span>{CusPwd}</span>
+              <span >{CusPwd}</span>
             ) : (
               <input
                 value={updateCusPwd}
@@ -215,7 +215,7 @@ export default function Detail() {
           <div className="row">
             <span>Phones</span>
             {!edit ? (
-              <span>
+              <span className="from-control">
                 {phone}, {secondPhone}
               </span>
             ) : (
@@ -229,7 +229,7 @@ export default function Detail() {
           <div className="row">
             <span>Address</span>
             {!edit ? (
-              <span>{address}</span>
+              <span className="from-control">{address}</span>
             ) : (
               <input
                 value={updateAddress}
@@ -241,7 +241,7 @@ export default function Detail() {
           <div className="row">
             <span>Location</span>
             {!edit ? (
-              <span>{location ? `${location.lat}, ${location.lng}` : ""}</span>
+              <span className="from-control">{location ? `${location.lat}, ${location.lng}` : ""}</span>
             ) : (
               <input
                 value={updateLocation}
