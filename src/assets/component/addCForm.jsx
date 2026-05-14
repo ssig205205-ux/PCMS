@@ -182,6 +182,7 @@ export default function AddCForm() {
           <option value="">Select Plan</option>
           <option value="20mbps">20mbps</option>
           <option value="30mbps">30mbps</option>
+          <option value="40mbps">40mbps</option>
           <option value="50mbps">50mbps</option>
           <option value="100mbps">70mbps</option>
           <option value="100mbps">100mbps</option>
