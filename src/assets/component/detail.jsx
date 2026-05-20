@@ -62,7 +62,7 @@ export default function Detail() {
 
 
 
-      const res = await fetch(`http://localhost:5000/api/user/${detailId}/${userIdtD}`, {
+      const res = await fetch(`https://cms-backend-xyb9.onrender.com/api/user/${detailId}/${userIdtD}`, {
         credentials: "include",
       });
 
