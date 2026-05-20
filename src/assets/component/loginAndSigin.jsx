@@ -114,6 +114,7 @@ function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [Team, setTeam] = useState("");
   const [error,setError] = useState("");
   const navigate = useNavigate();
 
@@ -137,6 +138,11 @@ function SignupPage() {
     setError("")
   };
 
+  const handleTeamChange = (e)=>{
+    setTeam(e.target.value)
+    setError("")
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle signup logic here
@@ -154,7 +160,7 @@ function SignupPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password, Team }),
       });
       const data = await response.json();
       console.log("Signup response:", data);
@@ -223,6 +229,20 @@ function SignupPage() {
               onChange={handleConfirmPasswordChange}
               required
             />
+          </div>
+           <div className="form-group">
+            <label>Team</label>
+            <select required onChange={handleTeamChange}>
+              <option value="Team-A">Team-A</option>
+              <option value="Team-B">Team-B</option>
+              <option value="Team-C">Team-C</option>
+              <option value="Team-D">Team-D</option>
+              <option value="Team-E">Team-E</option>
+              <option value="Team-F">Team-F</option>
+              <option value="Team-G">Team-G</option>
+              <option value="Team-H">Team-H</option>
+              <option value="Team-Condo">Team-Condo</option>
+            </select>
           </div>
           { error &&
             <div className="errorMassage">

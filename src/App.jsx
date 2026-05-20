@@ -8,14 +8,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./authContext.jsx";
 import ProtectedRoute from "./ProtectendRouth.jsx";
 import { DetailIdProvider } from "./assets/context/detail.jsx";
+import {UserIdProvider} from "./assets/context/userDetail.jsx";
 import About from "./aboutPage.jsx";
-
+import AdminPage from "./adminPage.jsx";
+import UserSaleDetail from "./userSaleDetail.jsx";
 
 function App() {
   return (
     <>
       <AuthProvider>
         <DetailIdProvider>
+          <UserIdProvider>
           <BrowserRouter>
             <Routes>
               <Route
@@ -53,8 +56,27 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute>
+                    <AdminPage />
+                  </ProtectedRoute>
+                }
+              />
+         
+              <Route
+                path="/user-sale-detail"
+                element={
+                  <ProtectedRoute>
+                    <UserSaleDetail />
+                  </ProtectedRoute>
+                }
+              />
+              
             </Routes>
           </BrowserRouter>
+          </UserIdProvider>
         </DetailIdProvider>
       </AuthProvider>
     </>

@@ -2,10 +2,13 @@ import { GoArrowLeft } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { DetailIdContext } from "../context/detail";
+import { useAuth } from "../../useAuth";
 
 export default function Detail() {
+  const {user} = useAuth();
+  const userType =  user?.user?.UserType;
   const navigate = useNavigate();
-  const { detailId } = useContext(DetailIdContext);
+  const { detailId,userIdtD  } = useContext(DetailIdContext);
 
   const [edit, setEdit] = useState(false);
   const [data, setData] = useState({});
@@ -25,11 +28,12 @@ export default function Detail() {
   const [updateOrderDate, setOrderDate] = useState("");
   const [updatePromotion, setPromotion] = useState("");
   const [updateStatus, setStatus] = useState("");
+  const [updateUserName,setUserName] =  useState("");
 
   // ESC
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === "Escape") navigate("/");
+      if (e.key === "Escape") navigate(-1);
     };
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
@@ -40,17 +44,41 @@ export default function Detail() {
     const fetchData = async () => {
       if (!detailId) return;
 
-      const res = await fetch(`https://cms-backend-xyb9.onrender.com/api/user/${detailId}`, {
+
+
+      const res = await fetch(`http://localhost:5000/api/user/${detailId}`, {
         credentials: "include",
       });
 
       const result = await res.json();
-      console.log(result);
+      console.log("detail",result);
       setData(result);
     };
 
-    fetchData();
-  }, [detailId]);
+
+    
+    const fetchData2 = async () => {
+      if (!detailId && !userIdtD) return;
+
+
+
+      const res = await fetch(`http://localhost:5000/api/user/${detailId}/${userIdtD}`, {
+        credentials: "include",
+      });
+
+      const result = await res.json();
+      console.log("detail",result);
+      setData(result);
+    };
+
+    if(userType==="admin"){
+      fetchData2();
+    } else {
+      fetchData()
+    }
+
+   
+  }, [detailId,userIdtD]);
 
   const {
     name,
@@ -71,6 +99,7 @@ export default function Detail() {
     advanceMonth,
     promotion,
     status,
+    userName
   } = data;
 
   // ✅ EDIT BUTTON (fixed logic)
@@ -91,6 +120,8 @@ export default function Detail() {
       setOrderDate(orderDateFormatted || "");
       setPromotion(promotion || "");
       setStatus(status || "");
+      setUserName(userName || "");
+      
     } else {
       if (window.confirm("Save changes?")) {
         updateData();
@@ -124,6 +155,7 @@ export default function Detail() {
       orderDate: updateOrderDate || orderDateFormatted || orderDate,
       promotion: updatePromotion || promotion,
       status: updateStatus || status,
+      userName : updateUserName || userName
     };
 
     const res = await fetch(`https://cms-backend-xyb9.onrender.com/api/user/${detailId}`, {
@@ -138,19 +170,47 @@ export default function Detail() {
     setData(updated);
   };
 
+  const handleBack = ()=>{
+    navigate(-1);
+  }
+
+  const handleCopy = async () =>{
+  const text = `
+  ${name || ""}
+  ${nrc || ""}
+  ${phone || ""},${secondPhone || ""}
+  ${address || ""}
+  ${
+    location ? `${location.lat}, ${location.lng}` : ""
+  }
+  ${plan || ""}-${advanceMonth || ""} months( ${promotion || ""})
+  requestDate-${requestDateFormatted || requestDate || ""}
+  SalePerson-${userName || ""}
+  `
+  try {
+    await navigator.clipboard.writeText(text);
+    alert("Copied to clipboard!");
+  } catch (err) {
+    console.error("Copy failed:", err);
+    alert("Failed to copy");
+  }
+  }
+
   return (
     <div>
       <div className="detailTitle">
         <div className="detailTitle2">
-          <Link to="/">
-            <GoArrowLeft className="Arrow" />
-          </Link>
+            <GoArrowLeft className="Arrow" onClick={handleBack} />
           <h1>Customer Details</h1>
         </div>
-
+        <div className="btContainer">
+        {!edit ? <button className="CopyBt" onClick={handleCopy}>
+          Copy File
+        </button>:<></>}
         <button className="editBt" onClick={handleEditClick}>
           {edit ? "Save" : "Edit"}
         </button>
+        </div>
       </div>
 
       <div className="detailContainer">
@@ -318,6 +378,12 @@ export default function Detail() {
                 <option value="+2 months">+2 months</option>
               </select>
             )}
+          </div>
+           <div className="row">
+            <span>SalePerson</span>
+       
+              <span>{userName}</span>
+          
           </div>
         </div>
 

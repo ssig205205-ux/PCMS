@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../useAuth";
 
 export default function AddCForm() {
-  const nevigate = useNavigate()
+  const nevigate = useNavigate();
   const [name, setName] = useState("");
   const [nrc, setNrc] = useState("");
   const [phone, setPhone] = useState("");
@@ -16,6 +17,9 @@ export default function AddCForm() {
   const [advanceMonth, setAdvanceMonth] = useState("");
   const [promotion, setPromotion] = useState("");
   const [status, setStatus] = useState(undefined);
+  const [salePerson,setSalePerson] = useState("");
+  const { user } = useAuth();
+  const userType = user?.user?.UserType;
 
   const handelChangeName = (e) => {
     setName(e.target.value);
@@ -38,12 +42,13 @@ export default function AddCForm() {
   };
 
   const handelChangeLocation = (e) => {
-    const showLocation = e.target.value
-    setShowLocation(showLocation)
-    const location = e.target.value.split(",").map((coord) => parseFloat(coord.trim()));
+    const showLocation = e.target.value;
+    setShowLocation(showLocation);
+    const location = e.target.value
+      .split(",")
+      .map((coord) => parseFloat(coord.trim()));
     setLocation({ lat: location[0], lng: location[1] });
     //setLocation(e.target.value);
-    
   };
 
   const handelChangePlan = (e) => {
@@ -62,6 +67,9 @@ export default function AddCForm() {
   const handelChangeStatus = (e) => {
     setStatus(e.target.value);
   };
+  const handleChangeSaleP =(e)=>{
+    setSalePerson(e.target.value);
+  }
 
   //this fun will handle the fatch post function to send new userss
   const handleSubmit = async (e) => {
@@ -78,12 +86,22 @@ export default function AddCForm() {
       advanceMonth,
       promotion,
       status,
+      userName: salePerson
     };
-    if(!name || !nrc || !phone || !address || !location || !plan || !requestDate || !advanceMonth) {
+    if (
+      !name ||
+      !nrc ||
+      !phone ||
+      !address ||
+      !location ||
+      !plan ||
+      !requestDate ||
+      !advanceMonth
+    ) {
       alert("Please fill in all required fields!");
       return;
     }
-    try{
+    try {
       const response = await fetch("https://cms-backend-xyb9.onrender.com/api/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -105,11 +123,12 @@ export default function AddCForm() {
       setAdvanceMonth("");
       setPromotion("");
       setStatus(undefined);
-      nevigate("/")
-    }catch(error){
+      setSalePerson("")
+      nevigate("/");
+    } catch (error) {
       console.error("Error adding customer:", error);
     }
-    
+
     // Here you can send newCustomer to your backend API to save it in the database
   };
 
@@ -192,7 +211,12 @@ export default function AddCForm() {
         <label>
           Requested Date{!requestDate && <span className="required">*</span>}
         </label>
-        <input type="date" onChange={handelChangeDate} value={requestDate} required />
+        <input
+          type="date"
+          onChange={handelChangeDate}
+          value={requestDate}
+          required
+        />
 
         <label>
           Advance Month{!advanceMonth && <span className="required">*</span>}
@@ -221,6 +245,24 @@ export default function AddCForm() {
           <option value="Cancel">Cancel</option>
           <option value="Pending">Pending</option>
         </select>
+        {userType === "admin" ? (
+          <>
+            <label>
+              SalePerson
+              {!requestDate && <span className="required">*</span>}
+            </label>
+
+            <input
+              type="text"
+              placeholder="enter Sale Persons"
+              onChange={handleChangeSaleP}
+              value={salePerson}
+              required
+            />
+          </>
+        ) : (
+          <></>
+        )}
       </form>
       <hr></hr>
       <div className="buttonGroup">

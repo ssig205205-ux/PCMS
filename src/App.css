@@ -1275,7 +1275,7 @@ body {
     height: 20px;
     color: white;
     font-weight: bold;
-    margin-right: 40px;
+    margin-right: 20px;
     box-shadow: 1px 2px 4px rgba(0,0,0,0.2);
 }
 
@@ -1838,5 +1838,96 @@ h2 {
   margin: 0px 0px;
 
 }
+}
+
+.admin{
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+}
+.adminheader{
+  box-shadow: none;
+  margin-left: 7px;
+}
+
+.saleHeader{
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  margin-left: 7px;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.saleHeader h1{
+  font-size: 25px;
+  color: rgb(38, 151, 240);
+ 
+}
+@media (max-width: 420px) {
+  .saleHeader{
+    gap: 10px;
+      text-align: center;
+  }
+  .saleHeader h1{
+    font-size: 15px;
+  }
+}
+
+.detailH{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 50px;
+  padding: 5px;
+
+}
+
+.detaillist{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.detaillist li{
+  list-style: none;
+  color: #555;
+  font-weight: bold;
+}
+
+.detaillist li {
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+
+.saleActive {
+  background-color: #4e46e57a;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+}
+.saleList{
+  margin-right: 20px;
+}
+
+.adminA{
+  margin-left: 5px;
+}
+
+.btContainer{
+  display: flex;
+  gap: 0;
+}
+.CopyBt{
+   background-color:rgba(38, 151, 240, 1) ;
+    border: none;
+    border-radius: 5px;
+    width: 70px;
+    height: 20px;
+    color: white;
+    font-weight: bold;
+    margin-right: 20px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.2);
 }
 

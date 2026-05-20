@@ -1,61 +1,42 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { DetailIdContext } from "../context/detail";
+import { useState,useEffect } from "react";
 import { useScreenSize } from "../context/screenSize";
-import { useAuth } from "../../useAuth";
+import { DetailIdContext } from "../context/detail";
+import { useNavigate } from "react-router";
+import { useContext } from "react";
 
 
-export default function Tabel({
-  searchCus,
-  status,
-  plan,
-  date,
-  customersData,
-}) {
- let tableData = Array.isArray(customersData)
-  ? [...customersData]
-  : [];
-  const { user } = useAuth();
-    const userType = user?.user?.UserType;
-  
+export default function SalesPage({userId}) {
+  const {isMobile} = useScreenSize() // keep your real isMobile logic here later
+  const [saleData,setSaleData] = useState([])
 
-  if (searchCus) {
-    tableData = tableData.filter((item) => {
-      const searchTerm = searchCus.toLowerCase();
-      return (
-        item.name.toLowerCase().includes(searchTerm) ||
-        // item.id.toString().includes(searchTerm) ||
-        item.phone.toString().includes(searchTerm) ||
-      item.CusId?.toString().includes(searchTerm)
-      );
-    });
-  }
-
-  if (status) {
-    tableData = tableData.filter((item) => item.status === status);
-  }
-
-  if (plan) {
-    tableData = tableData.filter((item) => item.plan === plan);
-  }
-
-  if (date) {
-    tableData = tableData.filter((item) => item.orderDateFormatted === date);
-  }
+ 
+  useEffect(() => {
+      const fetchData = async () => {
+        const response = await fetch(`https://cms-backend-xyb9.onrender.com/api/admin/cus/${userId}`, {
+          credentials: "include",
+        });
+        if (!response.ok) {
+          throw new Error("something is wrong");
+        }
+        const data = await response.json();
+        console.log(data)
+        setSaleData(data);
+      };
+      fetchData();
+    }, []);
 
   const navigate = useNavigate();
   const { setDetailId,setUserIdtD} = useContext(DetailIdContext);
-   const handleDetailId = (id,UserID) => {
+  const handleDetailId = (id,UserID) => {
     setDetailId(id);
-    console.log(UserID)
     setUserIdtD(UserID);
     navigate("/detail");
   };
 
-  
-  //eslint-disable-next-line
-  const { isMobile, isTablet, isDesktop } = useScreenSize();
+  // ✅ Mock data
+   let tableData = Array.isArray(saleData) ? [...saleData] : [];
 
+  
   return (
     <div className="tableContainer">
       {!isMobile ? (
@@ -67,7 +48,7 @@ export default function Tabel({
               <th>NRC Number</th>
               <th>Contact</th>
               <th>Customer ID</th>
-              <th>{userType==="admin"? "Sale Person" : "App pw"}</th>
+              <th>App PW</th>
               <th>Status</th>
               <th>Plans (mbps)</th>
               <th>Ordered Date</th>
@@ -77,19 +58,20 @@ export default function Tabel({
 
           <tbody>
             {tableData.length > 0 ? (
-              tableData.map((item) => (
-                
+              tableData.map((item, index) => (
                 <tr key={item._id}>
-                  <td>{tableData.indexOf(item) + 1}</td>
+                  <td>{index + 1}</td>
                   <td>{item.name}</td>
                   <td>{item.nrc}</td>
-                  <td>{item.phone},{item. secondPhone}</td>
-                  <td>{item.CusId}</td>
                   <td>
-                   {userType==="admin"? item.userName : item.CusPwd}
+                    {item.phone}, {item.secondPhone}
                   </td>
+                  <td>{item.CusId}</td>
+                  <td>{item.CusPwd ? item.CusPwd : "_"}</td>
                   <td
-                    className={`status ${item.status ? item.status.toLowerCase() : "pending"}`}
+                    className={`status ${
+                      item.status ? item.status.toLowerCase() : "pending"
+                    }`}
                   >
                     {item.status ? item.status.toLowerCase() : "pending"}
                   </td>
@@ -100,7 +82,7 @@ export default function Tabel({
                   <td>
                     <button
                       className="detailButton"
-                      onClick={() => handleDetailId(item._id , item.userid)}
+                      onClick={() =>  handleDetailId(item._id,item.userid)}
                     >
                       =
                     </button>
@@ -122,7 +104,7 @@ export default function Tabel({
             <tr>
               <th>Customer Name</th>
               <th>Customer ID</th>
-              <th>{userType==="admin"? "Sale Persons" : "Contact"}</th>
+              <th>Contact</th>
               <th>Status</th>
               <th>Detail</th>
             </tr>
@@ -132,12 +114,13 @@ export default function Tabel({
             {tableData.length > 0 ? (
               tableData.map((item) => (
                 <tr key={item._id}>
-                  {/* <td>{tableData.indexOf(item) + 1}</td> */}
                   <td>{item.name}</td>
                   <td>{item.CusId}</td>
-                  <td>{userType==="admin"? item.userName : item.phone}</td>
+                  <td>{item.phone}</td>
                   <td
-                    className={`status ${item.status ? item.status.toLowerCase() : "pending"}`}
+                    className={`status ${
+                      item.status ? item.status.toLowerCase() : "pending"
+                    }`}
                   >
                     {item.status ? item.status.toLowerCase() : "pending"}
                   </td>
@@ -153,7 +136,7 @@ export default function Tabel({
               ))
             ) : (
               <tr>
-                <td colSpan="10" style={{ textAlign: "center" }}>
+                <td colSpan="5" style={{ textAlign: "center" }}>
                   No User Found
                 </td>
               </tr>

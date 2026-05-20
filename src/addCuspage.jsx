@@ -8,7 +8,7 @@ export default function AddCusPage(){
     useEffect(() => {
         const handleEsc = (event) => {
           if (event.key === "Escape") {
-                nevigate("/");
+                nevigate(-1);
             // do something (close modal, reset state, etc.)
           }
         };

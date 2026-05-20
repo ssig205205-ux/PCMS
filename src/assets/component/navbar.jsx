@@ -21,11 +21,14 @@ export default function Navbar({ activeStatus }) {
     if (activeStatus === "about") {
       about = "activeNav";
     }
+    
   }
 
   const login = !!user;
   const userNameUnslice = user?.user?.name;
   const userName = userNameUnslice ? userNameUnslice.slice(0, 3) : "Gest";
+  const userType = user?.user?.UserType;
+  console.log(userType)
 
   const navigate = useNavigate();
 
@@ -60,9 +63,14 @@ export default function Navbar({ activeStatus }) {
             <Link to="/lead" style={{ textDecoration: "none" }}>
               <li className={lead}>Lead</li>
             </Link>
+            { userType==="user" ? 
             <Link to="/about" style={{ textDecoration: "none" }}>
             <li className={about}>About</li>
+            </Link> :
+            <Link to="/admin" style={{ textDecoration: "none" }}>
+            <li className={about}>Admin</li>
             </Link>
+            }
           </ul>
         </nav>
       </div>
