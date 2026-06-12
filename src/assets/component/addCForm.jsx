@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../useAuth";
@@ -14,13 +14,40 @@ export default function AddCForm() {
   const [location, setLocation] = useState("");
   const [plan, setPlan] = useState("");
   const [requestDate, setRequestedDate] = useState("");
-  const [advanceMonth, setAdvanceMonth] = useState("");
+  const [advanceMonth, setAdvanceMonth] =useState("");
   const [promotion, setPromotion] = useState("");
   const [status, setStatus] = useState(undefined);
   const [salePerson,setSalePerson] = useState("");
+  const [userData, setuserData] = useState([]);
+  const [userNames,setUserName] = useState([]);
   const { user } = useAuth();
   const userType = user?.user?.UserType;
 
+   
+     
+      useEffect(()=>{
+
+    const fetchData = async () => {  
+       
+        const response = await fetch("https://cms-backend-xyb9.onrender.com/api/admin", {
+          credentials: "include",
+        });
+        if (!response.ok) {
+          throw new Error("something is wrong");
+        }
+        const data = await response.json();
+        console.log(data)
+        setuserData(data);
+        if(userType === "admin"){
+          const names = userData.map((item)=>item.name);
+          setUserName(names);
+          console.log(names)
+        }
+
+      }; 
+      fetchData();
+      },[userData.length]);
+ 
   const handelChangeName = (e) => {
     setName(e.target.value);
   };
@@ -252,13 +279,14 @@ export default function AddCForm() {
               {!requestDate && <span className="required">*</span>}
             </label>
 
-            <input
-              type="text"
-              placeholder="enter Sale Persons"
-              onChange={handleChangeSaleP}
-              value={salePerson}
-              required
-            />
+            <select onChange={handleChangeSaleP} value={salePerson} required>
+              <option value="">Select Sale Person</option>
+              {userNames.map((name, index) => (
+                <option key={index} value={name}>
+                  {name}
+                </option>
+              ))}
+            </select>  
           </>
         ) : (
           <></>
